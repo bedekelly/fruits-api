@@ -3,11 +3,15 @@ MAINTAINER me@bede.io
 EXPOSE 80
 
 # Install nginx and nano.
-RUN apt-get update &&       \
-    apt-get upgrade -y &&   \
-    apt-get install -y      \
-        nginx               \
-	nano
+RUN apt-get update     &&         \
+    apt-get upgrade -y &&         \
+    apt-get install -y            \
+        nginx                     \
+	nano           &&         \
+    apt-get clean      &&         \
+    rm -rf /var/lib/apt/lists/*   \
+           /tmp/*                 \
+	   /var/tmp/*
 
 # Install Python dependencies
 COPY ops/requirements.txt /tmp/
